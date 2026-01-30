@@ -64,17 +64,17 @@ REALUSER="${SUDO_USER:-$USER}"
     fi
 
       # try notify-send (works on most Linux DEs)
-    if command -v notify-send &>/dev/null; then
-   sudo -u "$REALUSER" DBUS_SESSION_BUS_ADDRESS=unix:path=/run/user/1000/bus notify-send -u "$urgency" -i "$icon" -a "$APP_NAME" "$title" "$message" 2>/dev/null || true
-        return 0
-    fi
+ #   if command -v notify-send &>/dev/null; then
+ #  sudo -u "$REALUSER" DBUS_SESSION_BUS_ADDRESS=unix:path=/run/user/1000/bus notify-send -u "$urgency" -i "$icon" -a "$APP_NAME" "$title" "$message" 2>/dev/null || true
+ #       return 0
+ #   fi
 
-    #fallback to wall
+    # try wall (should work everywhere)
      if command -v wall &>/dev/null; then
     wall -n "$message" 2>/dev/null || true
         return 0
     fi
-
+# exit silently if not found
        return 0
 }
 
