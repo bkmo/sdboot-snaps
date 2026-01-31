@@ -3,7 +3,6 @@
 # forked from https://github.com/jrabinow/snapper-rollback with bootbackup commits
 
 pkgname=simple-sdboot-snapshots
-pkg_name=sdboot-snaps
 pkgver=1.0.1
 pkgrel=1
 pkgdesc='Create UKIs for SD-Boot BTRFS bootable snapshot entries'
@@ -17,7 +16,7 @@ source=(git+"$url")
 sha256sums=('SKIP')
 
     package() {
-    cd $pkg_name
+    cd $pkgname
     install -Dm 0644  "05-path-stop.hook" -t "$pkgdir/usr/share/libalpm/hooks/"
     install -Dm 0644  "zz-path-start.hook" -t "$pkgdir/usr/share/libalpm/hooks/"
     install -Dm 0755  "snap-path-pre" -t "$pkgdir/usr/share/libalpm/scripts/"
