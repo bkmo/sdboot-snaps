@@ -116,6 +116,6 @@ How to disable Notifications: `set NOTIFICATIONS=false in /etc/sdboot-snaps.conf
 - BTRFS subvolumes setup the "Arch" way. @, @home, @snapshots.
 - EFI/ESP (2GB suggested) mounted to /efi with sd-boot installed to /efi.
 - Boot cmdline must be read-write.
-- Ukify package must be installed.
+- systemd-ukify package must be installed.
 - If secureboot is enabled, sbctl is needed to sign the uki's (sbctl file database auto-cleaned)
 
