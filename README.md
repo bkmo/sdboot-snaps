@@ -5,7 +5,7 @@ Boot directly into a previous system state if an update breaks your system.
 ## How It Works
 
 1. **Snapper** creates BTRFS snapshots in `/.snapshots/`
-2. **manage-snapshot-ukis** generates signed UKIs for each snapshot (defaults to 7)
+2. **manage-snapshot-ukis** generates signed UKIs for each snapshot (defaults to 7 but configurable in /etc/sdboot-snaps.conf)
 3. **Systemd Service** auto-refreshes UKIs after snapshot updates/deletions
 4. **systemd-boot** displays snapshot entries in the boot menu
 5. **Desktop notifications** alert when snapshot UKIs are created (can be disabled via .conf)
@@ -74,7 +74,7 @@ Log: `/var/log/snapshot-uki-refresh.log`
 ```bash
 snapper -c root create -d "Before upgrade"  # Create snapshot
 snapper -c root list                        # List snapshots
-manage-snapshot-ukis refresh                # Generate bootable UKIs (last 7)
+manage-snapshot-ukis refresh                # Generate bootable UKIs (default is last 7 but configurable in /etc/sdboot-snaps.conf)
 manage-snapshot-ukis refresh 10             # Generate more if space allows
 manage-snapshot-ukis space                  # Check EFI partition space
 manage-snapshot-ukis list                   # List bootable snapshot UKIs
