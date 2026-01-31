@@ -9,16 +9,17 @@ Boot directly into a previous system state if an update breaks your system.
 3. **Systemd Service** auto-refreshes UKIs after snapshot updates/deletions
 4. **systemd-boot** displays snapshot entries in the boot menu
 5. **Desktop notifications** alert when snapshot UKIs are created
+6. Designed to work well with the snap-pac pacman hook package. (recommended)
 
 ## Boot Menu
 
 Depending on your boot order, you will enter your boot menu and see entries like:
 
 ```
-Arch Linux (linux-hardened)                 ← Current system
-Arch Linux (linux-lts)                      ← LTS variant
-Snapshot #11 [hardened] (2025-12-08 14:30)  ← Bootable snapshot
-Snapshot #10 [hardened] (2025-12-07 10:15)  ← Older bootable snapshot
+Arch Linux (linux)                       ← Current system
+Arch Linux (linux-lts)                   ← LTS variant
+Snapshot #11 [linux] (2025-12-08 14:30)  ← Bootable snapshot
+Snapshot #10 [linux] (2025-12-07 10:15)  ← Older bootable snapshot
 ```
 
 ## Booting Into a Snapshot
