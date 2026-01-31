@@ -97,7 +97,7 @@ Log: `/var/log/snapshot-uki-refresh.log`
 ```bash
 snapper -c root create -d "pre upgrade"  # Create snapshot
 snapper -c root list                     # List snapshots
-manage-snapshot-ukis refresh             # Generate bootable UKIs (last 7 config in /etc/sdboot-snaps.conf)
+manage-snapshot-ukis refresh             # Generate bootable UKIs (last 7)
 manage-snapshot-ukis refresh 10          # Generate more if space allows
 manage-snapshot-ukis space               # Check EFI partition space
 manage-snapshot-ukis list                # List bootable snapshot UKIs
