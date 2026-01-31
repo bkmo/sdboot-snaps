@@ -13,11 +13,11 @@ url='https://github.com/bkmo/sdboot-snaps'
 depends=('ukify' 'snapper' 'btrfs-progs')
 optdepends=('sbctl')
 provides=('simple-sdboot-snapshots')
-source=("$url/archive/refs/tags/$pkgver.tar.gz")
+source=(git+"$url")
 sha256sums=('SKIP')
 
     package() {
-    cd $pkg_name-$pkgver
+    cd $pkg_name
     install -Dm 0644  "05-path-stop.hook" -t "$pkgdir/usr/share/libalpm/hooks/"
     install -Dm 0644  "zz-path-start.hook" -t "$pkgdir/usr/share/libalpm/hooks/"
     install -Dm 0755  "snap-path-pre" -t "$pkgdir/usr/share/libalpm/scripts/"
