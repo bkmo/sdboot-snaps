@@ -1,9 +1,6 @@
-# Maintainer: Gabby <28601 dash gabby at users dot noreply dot gitlab dot freedesktop dot org>
-# Maintainer: Julien <aur dot arch at fastmail dot com>
-# forked from https://github.com/jrabinow/snapper-rollback with bootbackup commits
-
+# Maintainer: bkmo <>
 pkgname=simple-sdboot-snapshots
-pkgver=1.0.1
+pkgver=1.0.2
 pkgrel=1
 pkgdesc='Create UKIs for SD-Boot BTRFS bootable snapshot entries'
 arch=('any')
