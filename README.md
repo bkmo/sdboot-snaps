@@ -72,7 +72,8 @@ cat /proc/cmdline | grep -o 'subvol=[^ ]*'
 # Option 1: Install btrfs-assistant via pacman. (recommended)
 sudo pacman -S btrfs-assistant
 
-# Option 2: Use snapper-rollback AUR package 
+# Option 2: Use snapper-rollback AUR package
+snapper list ## find snapshot number to restore 
 sudo snapper-rollback <snapshot_number>
 
 # Option 3: Manual approach
