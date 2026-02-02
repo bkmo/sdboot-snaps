@@ -1,5 +1,4 @@
-# Simple SD-Boot uki snapshot creation and automatic boot entries in sd-boot menu
-for Arch Linux.
+# Simple SD-Boot uki snapshot creation and automatic boot entries in sd-boot menu for Arch Linux.
 Boot directly into a previous system state if an update breaks your system.
 Snapshots are r/w  and will boot without an overlay filesystem. (keep it simple).
 **Writable snapshots if modified will no longer reflect their original state.
