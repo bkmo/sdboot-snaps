@@ -10,7 +10,7 @@ Snapshots are r/w  and will boot without an overlay filesystem. (keep it simple)
 
 requirements:
    - BTRFS with snapper (snapshots in /.snapshots/N/snapshot format)
-   - systemd-boot installed (ESP mounted to /efi)
+   - systemd-boot installed, ESP mounted to /efi (can be changed in /etc/sdboot-snaps.conf)
    - sbctl for Secure Boot signing (or unsigned if SB disabled)
    - systemd-ukify for UKI generation
 
@@ -75,7 +75,11 @@ sudo pacman -S btrfs-assistant
 snapper list ## find snapshot number to restore 
 sudo snapper-rollback <snapshot_number>
 
-# Option 3: Manual approach
+# Option 3: Use snapper rollback (for OpenSuse layout only)
+snapper list ## find snapshot number to restore 
+snapper rollback <snapshot_number>
+
+# Option 4: Manual approach
 # 1. Note snapshot number: cat /proc/cmdline
 # 2. Replace current root
 sudo btrfs subvolume delete /@
@@ -116,7 +120,7 @@ How to disable Notifications: `set NOTIFICATIONS=false in /etc/sdboot-snaps.conf
 
 - Snapper must be enabled with a root config.
 - BTRFS subvolumes setup the "Arch" way. @, @home, @snapshots. (OpenSuse layout also valid)
-- EFI/ESP (2GB suggested) mounted to /efi with sd-boot installed to /efi.
+- EFI/ESP (2GB suggested) mounted to /efi (can be configured via /etc/sdboot-snaps.conf)
 - Boot cmdline must be read-write.
 - systemd-ukify package must be installed.
 - If secureboot is enabled, sbctl is needed to sign the uki's (sbctl file database auto-cleaned)
