@@ -17,7 +17,7 @@ requirements:
 ## Installation
 
 ```bash
-git clone https://github.com/bkmo/simple-sdboot-snapshots.git
+git clone https://github.com/bkmo/simple-sdboot-snapshots
 cd simple-sdboot-snapshots
 makepkg -srci
 sudo systemctl enable --now snapper-boot-entries.path
