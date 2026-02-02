@@ -1,6 +1,6 @@
 # Maintainer: bkmo <>
 pkgname=simple-sdboot-snapshots
-pkgver=1.0.3
+pkgver=1.0.4
 pkgrel=1
 pkgdesc='Create UKIs for SD-Boot BTRFS bootable snapshot entries'
 arch=('any')
@@ -20,7 +20,7 @@ sha256sums=('SKIP')
     install -Dm 0755  "pacman/snap-path-post" -t "$pkgdir/usr/share/libalpm/scripts/"
     install -Dm 0644  "service/snapper-boot-entries.path" -t "$pkgdir/etc/systemd/system/"
     install -Dm 0644  "service/snapper-boot-entries.service" -t "$pkgdir/etc/systemd/system/"
-    install -Dm 0755  "scripts/sdboot-snaps.conf" -t "$pkgdir/etc/"
+    install -Dm 0755  "config/sdboot-snaps.conf" -t "$pkgdir/etc/"
     install -Dm 0755  "scripts/refresh-snapshot-ukis" -t "$pkgdir/usr/local/bin/"
     install -Dm 0755  "scripts/manage-snapshot-ukis" -t "$pkgdir/usr/local/bin/"
 }
