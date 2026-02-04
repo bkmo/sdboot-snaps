@@ -5,4 +5,4 @@ After=snapper-cleanup.service snapper-timeline.service
 [Service]
 Type=oneshot
 ExecStart=/usr/local/bin/refresh-snapshot-ukis
-ExecStartPre=bash -c '/bin/sleep 15'
+ExecStartPre=bash -c '/bin/sleep 10'
