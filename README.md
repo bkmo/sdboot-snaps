@@ -7,6 +7,7 @@ Snapshots are r/w  and will boot without an overlay filesystem. (keep it simple)
    - creates signed Unified Kernel Images (UKIs) for BTRFS snapshots.
    - these UKIs are self-contained and work with Secure Boot when signed.
    - sd-boot menu is automatically populated with snapshot boot entries.
+   - CPU Micrcode can be added to the init via config if not using mkinitcpio hook. 
 
 requirements:
    - BTRFS with snapper (snapshots in /.snapshots/N/snapshot format)
