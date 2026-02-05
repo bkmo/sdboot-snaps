@@ -1,0 +1,5 @@
+#!/bin/bash
+if grep -q .snapshot /proc/cmdline; then
+notify-send -u critical -i data-warning --app-name Btrfs-Snapshot 'RW Btrfs Snapshot Detected!' 'Booted into a RW Btrfs Snapshot. Please restore the snapshot now or reboot.'
+exit 0
+fi
