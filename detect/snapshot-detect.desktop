@@ -1,6 +1,6 @@
 [Desktop Entry]
 Name=Snapshot Detect
 Icon=hwinfo
-Exec=/usr/bin/snapshot-detect
+Exec=/usr/local/bin/snapshot-detect
 Terminal=false
 Type=Application
