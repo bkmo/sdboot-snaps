@@ -96,6 +96,11 @@ Systemd service regenerates snapshot UKIs when:
 
 - snapshots are created/deleted
 - Packages upgraded/installed/removed (requires snap-pac)
+- Snapshot UKIs will appear in the systemd-boot menu automatically.
+To boot: Hold Space during boot to access systemd-boot menu
+
+Look for entries like:
+  Snapshot #N [kernel] (date)
 
 Log: `/var/log/snapshot-uki-refresh.log`
 
