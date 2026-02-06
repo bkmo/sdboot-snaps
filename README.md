@@ -2,13 +2,13 @@
 Boot directly into a previous system state if an update breaks your system.
 Snapshots are set to r/w  and will boot without an overlay filesystem. (keep it simple).
 **Writable snapshots if modified will no longer reflect their original state.
-Read Only snapshots can be configured via sdboot-snaps.conf and require the sd-volatile mkinitcpio hook added.
+Read Only snapshots can be configured via sdboot-snaps.conf. The RO "overlay" option (writable overlay for / no changes saved to snapshot) rerequires the sd-volatile mkinitcpio hook added. The RO "state" option (/var in tmpfs no changes to snapshot).
 
  BTRFS Snapshot UKI Manager for systemd-boot (Secure Boot Compatible):
    - creates signed Unified Kernel Images (UKIs) for BTRFS snapshots.
    - these UKIs are self-contained and work with Secure Boot when signed.
    - sd-boot menu is automatically populated with snapshot boot entries.
-   - CPU Micrcode can be added to the init via config if not using mkinitcpio hook. 
+   - CPU Micrcode can be added to the init via config if not using mkinitcpio microcode hook. 
 
 requirements:
    - BTRFS with snapper (snapshots in /.snapshots/N/snapshot format)
@@ -19,8 +19,8 @@ requirements:
 ## Installation
 
 ```bash
-git clone https://github.com/bkmo/simple-sdboot-snapshots
-cd simple-sdboot-snapshots
+git clone https://github.com/bkmo/sdboot-snaps
+cd sdboot-snaps
 makepkg -srci
 sudo systemctl enable --now snapper-boot-entries.path
 sudo pacman -S snap-pac --needed  ##recommended for pre post pacman snapshots
@@ -50,7 +50,7 @@ Snapshot #10 [linux] (2025-12-07 10:15)  ← Older bootable snapshot
 
 1. Turn on/reboot your system
 2. Select a snapshot entry from the boot menu
-3. System boots into that snapshot - fully functional, writable
+3. System boots into that snapshot - fully functional, writable (Readonly options available)
 4. Verify you are in the right snapshot (see below)
 5. If all good, make it permanent (see below)
 
@@ -73,21 +73,17 @@ cat /proc/cmdline | grep -o 'subvol=[^ ]*'
 
 ```bash
 # Option 1: Install btrfs-assistant via pacman. (recommended)
+# Best option for Arch subvol layout, works well with RO "overlay" option.
 sudo pacman -S btrfs-assistant
 
-# Option 2: Use snapper-rollback AUR package
+# Option 2: Use snapper-rollback AUR package (Arch subvol layout only)
 snapper list ## find snapshot number to restore 
 sudo snapper-rollback <snapshot_number>
 
 # Option 3: Use snapper rollback (for OpenSuse layout only)
+# RO "state" option needed for snapper to function in RO booted snapshot.
 snapper list ## find snapshot number to restore 
 snapper rollback <snapshot_number>
-
-# Option 4: Manual approach
-# 1. Note snapshot number: cat /proc/cmdline
-# 2. Replace current root
-sudo btrfs subvolume delete /@
-sudo btrfs subvolume snapshot /.snapshots/<N>/snapshot /@
 ```
 
 ## Automatic UKI Refresh
@@ -108,7 +104,7 @@ Log: `/var/log/snapshot-uki-refresh.log`
 
 ```bash
 snapper -c root create -d "pre upgrade"  # Create snapshot
-snapper -c root list                     # List snapshots
+snapper -c root list                     # List snapshots (does not work with RO option "overlay")
 manage-snapshot-ukis refresh             # Generate bootable UKIs (last 7)
 manage-snapshot-ukis refresh 10          # Generate more if space allows
 manage-snapshot-ukis space               # Check EFI partition space
@@ -130,7 +126,7 @@ How to disable Notifications: `set NOTIFICATIONS=false in /etc/sdboot-snaps.conf
 - Snapper must be enabled with a root config.
 - BTRFS subvolumes setup the "Arch" way. @, @home, @snapshots. (OpenSuse layout also valid)
 - EFI/ESP (2GB suggested) mounted to /efi (can be configured via /etc/sdboot-snaps.conf)
-- Read Only configurations need the sd-volatile mkinitcpio hook added for an overlay fs.
+- Read Only configuration "overlay" needs the sd-volatile mkinitcpio hook added for an overlay fs /.
 - systemd-ukify package must be installed.
 - If secureboot is enabled, sbctl is needed to sign the uki's (sbctl file database auto-cleaned)
 
