@@ -14,7 +14,7 @@ sha256sums=('SKIP')
 backup=("etc/sdboot-snaps.conf")
 
     package() {
-    cd $pkgname
+    cd $pkgname-$pkgver
     install -Dm 0644  "pacman/05-path-stop.hook" -t "$pkgdir/usr/share/libalpm/hooks/"
     install -Dm 0644  "pacman/zz-path-start.hook" -t "$pkgdir/usr/share/libalpm/hooks/"
     install -Dm 0755  "pacman/snap-path-pre" -t "$pkgdir/usr/share/libalpm/scripts/"
