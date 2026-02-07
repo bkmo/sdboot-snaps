@@ -27,5 +27,5 @@ backup=("etc/sdboot-snaps.conf")
     install -Dm 0644   README.md -t "$pkgdir/usr/share/doc/${pkgname}/"
     install -Dm755 detect/snapshot-detect -t "$pkgdir/usr/local/bin/"
     install -Dm644 detect/snapshot-detect.desktop -t "$pkgdir/etc/xdg/autostart/"
-    install -Dm755 LICENSE -t "${pkgdir}/usr/share/licenses/${pkgname}/"
+    install -Dm644 LICENSE -t "${pkgdir}/usr/share/licenses/${pkgname}/"
 }
