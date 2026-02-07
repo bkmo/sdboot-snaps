@@ -75,11 +75,12 @@ cat /proc/cmdline | grep -o 'subvol=[^ ]*'
 
 ```bash
 # Option 1: Install btrfs-assistant via pacman. (recommended)
-# Best option for Arch subvol layout, works well with RO "overlay" option.
+# Best option for Arch subvol layout, edit the .conf, works well with RO "overlay" option.
 sudo pacman -S btrfs-assistant
 
 # Option 2: Use snapper-rollback AUR package (Arch subvol layout only)
-snapper list ## find snapshot number to restore 
+snapper list ## find snapshot number to restore (does not work with ro "overlay")
+snapper-list ## find snapshot number (included script to list snapshots with ro "overlay")
 sudo snapper-rollback <snapshot_number>
 
 # Option 3: Use snapper rollback (for OpenSuse layout only)
