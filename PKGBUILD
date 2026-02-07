@@ -1,12 +1,12 @@
 # Maintainer: bkmo <>
 pkgname=sdboot-snaps
-pkgver=1.1.3
+pkgver=1.1.4
 pkgrel=1
 pkgdesc='Create UKIs for SD-Boot BTRFS bootable snapshot entries'
 arch=('any')
 license=('GPL3')
 url='https://github.com/bkmo/sdboot-snaps'
-depends=('systemd-ukify' 'snapper' 'btrfs-progs' 'coreutils')
+depends=('systemd-ukify' 'snapper' 'btrfs-progs' 'coreutils' 'libxml2')
 optdepends=('sbctl')
 provides=('sdboot-snaps')
 source=("$pkgname-$pkgver.tar.gz::$url/archive/refs/tags/$pkgver.tar.gz")
@@ -21,9 +21,9 @@ backup=("etc/sdboot-snaps.conf")
     install -Dm 0755  "pacman/snap-path-post" -t "$pkgdir/usr/share/libalpm/scripts/"
     install -Dm 0644  "service/snapper-boot-entries.path" -t "$pkgdir/etc/systemd/system/"
     install -Dm 0644  "service/snapper-boot-entries.service" -t "$pkgdir/etc/systemd/system/"
-    install -Dm 0755  "config/sdboot-snaps.conf" -t "$pkgdir/etc/"
+    install -Dm 0644  "config/sdboot-snaps.conf" -t "$pkgdir/etc/"
     install -Dm 0755  "scripts/refresh-snapshot-ukis" -t "$pkgdir/usr/local/bin/"
-    install -Dm 0755  "scripts/manage-snapshot-ukis" -t "$pkgdir/usr/local/bin/"
+    install -Dm 0755  "scripts/snapper-list" -t "$pkgdir/usr/local/bin/"
     install -Dm 0644   README.md -t "$pkgdir/usr/share/doc/${pkgname}/"
     install -Dm755 detect/snapshot-detect -t "$pkgdir/usr/local/bin/"
     install -Dm644 detect/snapshot-detect.desktop -t "$pkgdir/etc/xdg/autostart/"
