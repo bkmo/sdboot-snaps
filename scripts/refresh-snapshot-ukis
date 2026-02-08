@@ -10,7 +10,7 @@
 
 set -euo pipefail
 
-SNAPSHOT_MANAGER="/usr/local/bin/manage-snapshot-ukis"
+SNAPSHOT_MANAGER="/usr/local/bin/manage-ukis"
 LOG_FILE="/var/log/snapshot-uki-refresh.log"
 
 log() {
