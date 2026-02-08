@@ -1,6 +1,6 @@
 # Maintainer: bkmo <>
 pkgname=sdboot-snaps
-pkgver=1.1.7
+pkgver=1.1.8
 pkgrel=1
 pkgdesc='Create UKIs for SD-Boot BTRFS bootable snapshot entries'
 arch=('any')
@@ -29,4 +29,5 @@ backup=("etc/sdboot-snaps.conf")
     install -Dm755 detect/snapshot-detect -t "$pkgdir/usr/local/bin/"
     install -Dm644 detect/snapshot-detect.desktop -t "$pkgdir/etc/xdg/autostart/"
     install -Dm644 LICENSE -t "${pkgdir}/usr/share/licenses/${pkgname}/"
+    install -Dm644 sdboot-snaps.bmp -t "${pkgdir}/opt/sdboot-snaps/"
 }
