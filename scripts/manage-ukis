@@ -7,9 +7,9 @@
 # systemd-boot menu entries are automatically created.
 #
 # usage:
-#   ./manage_snapshot_entries.sh refresh [N]  # Generate UKIs for last N snapshots (default: 7)
-#   ./manage_snapshot_entries.sh list         # List current snapshot UKIs
-#   ./manage_snapshot_entries.sh cleanup      # Remove all snapshot UKIs
+#   manage-ukis refresh [N]  # Generate UKIs for last N snapshots (default: 7)
+#   manage-ukis list         # List current snapshot UKIs
+#   manage-ukis cleanup      # Remove all snapshot UKIs
 #
 # requirements:
 #   - BTRFS with snapper (snapshots in /.snapshots/N/snapshot format)
@@ -666,10 +666,10 @@ case "${1:-}" in
         echo "  space        - Show EFI partition space usage"
         echo ""
         echo "Examples:"
-        echo "  sudo manage-snapshot-ukis refresh      # Create UKIs for last 7 snapshots"
-        echo "  sudo manage-snapshot-ukis refresh 10   # Create UKIs for last 10 snapshots"
-        echo "  sudo manage-snapshot-ukis list         # Show snapshots and UKIs"
-        echo "  sudo manage-snapshot-ukis space        # Check EFI partition space"
+        echo "  sudo manage-ukis refresh      # Create UKIs for last 7 snapshots"
+        echo "  sudo manage-ukis refresh 10   # Create UKIs for last 10 snapshots"
+        echo "  sudo manage-ukis list         # Show snapshots and UKIs"
+        echo "  sudo manage-ukis space        # Check EFI partition space"
         echo ""
         echo "Notes:"
         echo "  - UKIs are ~50-100MB each, so limit snapshot count"
