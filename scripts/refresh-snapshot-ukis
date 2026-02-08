@@ -17,6 +17,54 @@ log() {
     echo "[$(date '+%Y-%m-%d %H:%M:%S')] $*" | tee -a "$LOG_FILE"
 }
 
+### Check if the script is being run with root privileges
+require_root() {
+	if ((EUID != 0)); then
+		echo "Script must be run with root privileges."
+		exit 1
+	fi
+}
+
+### Check if you are not in Btrfs.
+require_btrfs_root() {
+	local fstype
+	read -r fstype < <(findmnt --mountpoint / -no FSTYPE)
+	if [[ "$fstype" != "btrfs" ]]; then
+		log "Root filesystem is not Btrfs. Script stopped."
+		exit 0
+	fi
+}
+
+is_btrfs_ro() {
+	[[ $(btrfs property get / ro) == *true ]]
+}
+
+### Check if you are in snapshot
+is_snapshot() {
+	cmdline=$(</proc/cmdline)
+	if [[ $cmdline =~ rootflags.*subvol=.*?/([0-9]+)/snapshot ]]; then
+		return 0
+	else
+		return 1
+	fi
+}
+
+
+### Main logic
+require_root
+require_btrfs_root
+
+if is_btrfs_ro; then
+	log "You are in the read-only Btrfs. Refresh stopped."
+	exit 0
+fi
+
+if is_snapshot; then
+	log "You are booted from the snapshot. Refresh stopped."
+	exit 0
+fi
+
+
 # find the snapshot manager script
 if [ -x "$SNAPSHOT_MANAGER" ]; then
     MANAGER="$SNAPSHOT_MANAGER"
