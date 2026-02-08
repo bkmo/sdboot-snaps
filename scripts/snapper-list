@@ -36,4 +36,4 @@ get_snapshot_info() {
                 echo ""
               count=$((count+1))
             fi
-done
+done | tac
