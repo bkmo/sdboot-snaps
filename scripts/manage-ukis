@@ -372,8 +372,7 @@ list_snapshots() {
                 local date=$(echo "$info" | cut -d'|' -f2)
                 local type=$(echo "$info" | cut -d'|' -f3)
 
-                echo "    [$num] $desc ($date) ($rorw)(type=$type)"
-                echo ""
+                echo "[$num] $desc ($date) ($rorw)(type=$type)"
               count=$((count+1))
             fi
        done
