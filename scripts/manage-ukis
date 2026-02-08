@@ -21,11 +21,11 @@
 set -Eeuo pipefail
 
 # require root/sudo for all operations
-if [[ $EUID -ne 0 ]]; then
-    echo -e "\033[0;31mError:\033[0m This script must be run with sudo or as root."
-    echo "Usage: sudo $0 [command]"
-    exit 1
-fi
+#if [[ $EUID -ne 0 ]]; then
+ #   echo -e "\033[0;31mError:\033[0m This script must be run with sudo or as root."
+  #  echo "Usage: sudo $0 [command]"
+   # exit 1
+#fi
 
 #set default variables
 SNAPSHOTS_DIR="/.snapshots"
@@ -58,6 +58,56 @@ NC='\033[0m'
 log_info() { echo -e "${GREEN}>>>>>${NC} $*"; }
 log_warn() { echo -e "${YELLOW}Warning:${NC} $*"; }
 log_error() { echo -e "${RED}Error:${NC} $*"; }
+
+
+### Check if the script is being run with root privileges
+require_root() {
+	if ((EUID != 0)); then
+		echo "Script must be run with root privileges."
+		echo "Usage: sudo /usr/local/bin/manage-ukis [command]"
+		exit 1
+	fi
+}
+
+### Check if you are not in Btrfs.
+require_btrfs_root() {
+	local fstype
+	read -r fstype < <(findmnt --mountpoint / -no FSTYPE)
+	if [[ "$fstype" != "btrfs" ]]; then
+		log "Root filesystem is not Btrfs. Script stopped."
+		exit 0
+	fi
+}
+
+is_btrfs_ro() {
+	[[ $(btrfs property get / ro) == *true ]]
+}
+
+### Check if you are in snapshot
+is_snapshot() {
+	cmdline=$(</proc/cmdline)
+	if [[ $cmdline =~ rootflags.*subvol=.*?/([0-9]+)/snapshot ]]; then
+		return 0
+	else
+		return 1
+	fi
+}
+
+
+### Main logic
+require_root
+require_btrfs_root
+
+if is_btrfs_ro; then
+	log "You are in the read-only Btrfs. Refresh stopped."
+	exit 0
+fi
+
+if is_snapshot; then
+	log "You are booted from the snapshot. Refresh stopped."
+	exit 0
+fi
+
 
 # notification functions
 
