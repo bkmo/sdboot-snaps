@@ -32,7 +32,7 @@ get_snapshot_info() {
                 type=$(echo "$info" | cut -d'|' -f3)
                 rorw=$(btrfs property get "$dir" ro)
 
-                echo "    [$num] $desc ($date) ($rorw)(type=$type)"
+                echo "[$num] $desc ($date) ($rorw)(type=$type)"
                 echo ""
               count=$((count+1))
             fi
