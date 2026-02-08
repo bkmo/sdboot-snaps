@@ -31,7 +31,7 @@ Edit /etc/sdboot-snaps.conf to change default options. READONLY,MICROCODE,NOTIFI
 ## How It Works
 
 1. **Snapper** creates BTRFS snapshots in `/.snapshots/`
-2. **manage-snapshot-ukis** generates signed UKIs for each snapshot (defaults to last 7 (configurable in /etc/sdboot-snaps.conf)
+2. **manage-ukis** generates signed UKIs for each snapshot (defaults to last 7 (configurable in /etc/sdboot-snaps.conf)
 3. **Systemd Service** auto-refreshes UKIs after snapshot updates/deletions
 4. **systemd-boot** displays snapshot entries in the boot menu
 5. **Desktop notifications** alert when snapshot UKIs are created (can be disabled via .conf)
@@ -108,11 +108,11 @@ Log: `/var/log/snapshot-uki-refresh.log`
 ```bash
 snapper -c root create -d "pre upgrade"  # Create snapshot
 snapper -c root list                     # List snapshots (does not work with RO option "overlay")
-manage-snapshot-ukis refresh             # Generate bootable UKIs (last 7)
-manage-snapshot-ukis refresh 10          # Generate more if space allows
-manage-snapshot-ukis space               # Check EFI partition space
-manage-snapshot-ukis list                # List bootable snapshot UKIs
-manage-snapshot-ukis cleanup             # Remove all snapshot UKIs
+manage-ukis refresh             # Generate bootable UKIs (last 7)
+manage-ukis refresh 10          # Generate more if space allows
+manage-ukis space               # Check EFI partition space
+manage-ukis list                # List bootable snapshot UKIs
+manage-ukis cleanup             # Remove all snapshot UKIs
 ```
 
 ## Desktop Notifications
