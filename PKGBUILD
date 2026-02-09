@@ -11,7 +11,7 @@ depends=('systemd-ukify' 'snapper' 'btrfs-progs' 'coreutils' 'bash')
 optdepends=('sbctl')
 provides=('sdboot-snaps')
 #source=("$pkgname-$pkgver.tar.gz::$url/archive/refs/tags/$pkgver.tar.gz")
-source=(git+"https://github.com/bkmo/sdbootsnaps.git")
+source=(git+"https://github.com/bkmo/sdboot-snaps.git")
 sha256sums=('SKIP')
 backup=("etc/sdboot-snaps.conf")
 
