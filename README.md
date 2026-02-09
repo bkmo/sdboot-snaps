@@ -122,9 +122,9 @@ manage-ukis cleanup             # Remove all snapshot UKIs
 | UKIs created    | "Created N bootable snapshot entries"        |
 | Creation failed | "Failed to create bootable snapshot entries" |
 
-**How to disable Notifications:** `set NOTIFICATIONS=false in /etc/sdboot-snaps.conf`
+**To disable Notifications:** `set NOTIFY_ENABLED="false" in /etc/sdboot-snaps.conf`
 
-**Prerequisites for bootable snapshots:**
+## Prerequisites for bootable snapshots: ##
 
 - Snapper must be enabled with a root config.
 - BTRFS subvolumes setup the "Arch" way. @, @home, @snapshots. (OpenSuse layout also valid)
