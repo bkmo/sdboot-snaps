@@ -5,14 +5,14 @@ Snapshots are set to r/w  and will boot without an overlay filesystem. (keep it 
 Read Only snapshots can be configured via sdboot-snaps.conf. The RO "overlay" option (writable overlay for / no changes saved to snapshot) rerequires the sd-volatile mkinitcpio hook added. The RO "state" option (/var in tmpfs no changes to snapshot) is best for
 OpenSuse btrfs subvol layouts using snapper to rollback. The "Arch Way" btrfs subvolume layout is prefered, but it should also work with the "OpenSuse" layout in RW and RO "state" configuration.
 
- BTRFS Snapshot UKI Manager for systemd-boot (Secure Boot Compatible):
+ **BTRFS Snapshot UKI Manager for systemd-boot (Secure Boot Compatible):**
    - creates signed Unified Kernel Images (UKIs) for BTRFS snapshots.
    - these UKIs are self-contained and work with Secure Boot when signed.
    - sd-boot menu is automatically populated with snapshot boot entries.
    - CPU Micrcode can be added to the init via config if not using mkinitcpio microcode hook.
    - Options to set bootable snapshots RO or RW via config. (RW is default)
 
-requirements:
+**requirements:**
    - BTRFS with snapper (snapshots in /.snapshots/N/snapshot format)
    - systemd-boot installed, ESP mounted to /efi (can be changed in /etc/sdboot-snaps.conf)
    - sbctl for Secure Boot signing (or unsigned if SB disabled)
@@ -91,7 +91,7 @@ snapper rollback <snapshot_number>
 
 ## Automatic UKI Refresh
 
-Systemd service regenerates snapshot UKIs when:
+**Systemd service regenerates snapshot UKIs when:**
 
 - snapshots are created/deleted
 - Packages upgraded/installed/removed (requires snap-pac)
@@ -122,7 +122,7 @@ manage-ukis cleanup             # Remove all snapshot UKIs
 | UKIs created    | "Created N bootable snapshot entries"        |
 | Creation failed | "Failed to create bootable snapshot entries" |
 
-How to disable Notifications: `set NOTIFICATIONS=false in /etc/sdboot-snaps.conf`
+**How to disable Notifications: `set NOTIFICATIONS=false in /etc/sdboot-snaps.conf`**
 
 **Prerequisites for bootable snapshots:**
 
