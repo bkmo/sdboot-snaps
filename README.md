@@ -60,15 +60,15 @@ Snapshot #10 [linux] (2025-12-07 10:15)  ← Older bootable snapshot
 
 You should get a notification you are booted into a snapshot, if not:
 ```bash
-# Check current root subvolume
-btrfs subvolume show /
-# Snapshot: Name: @snapshots/10/snapshot
-# Normal:   Name: @
+Check current root subvolume
+ # btrfs subvolume show /
+ Snapshot: Name: @snapshots/10/snapshot
+ Normal:   Name: @
 
-# Quick check via kernel cmdline
-cat /proc/cmdline | grep -o 'subvol=[^ ]*'
-# Snapshot: subvol=@snapshots/10/snapshot
-# Normal:   subvol=@
+ Quick check via kernel cmdline
+# cat /proc/cmdline | grep -o 'subvol=[^ ]*'
+ Snapshot: subvol=@snapshots/10/snapshot
+ Normal:   subvol=@
 ```
 
 ## Making a Snapshot Permanent (Rollback)
@@ -76,12 +76,12 @@ cat /proc/cmdline | grep -o 'subvol=[^ ]*'
 ```bash
 Option 1: Install btrfs-assistant via pacman. (recommended)
 Best option for Arch subvol layout, edit the .conf, works well with RO "overlay" option.
- #sudo pacman -S btrfs-assistant
+ # sudo pacman -S btrfs-assistant
 
 Option 2: Use snapper-rollback AUR package (Arch subvol layout only)
- #snapper list ## find snapshot number to restore (does not work with ro "overlay")
- #snapper-list ## find snapshot number (included script to list snapshots with ro "overlay")
- #sudo snapper-rollback <snapshot_number>
+ # snapper list ## find snapshot number to restore (does not work with ro "overlay")
+ # snapper-list ## find snapshot number (included script to list snapshots with ro "overlay")
+ # sudo snapper-rollback <snapshot_number>
 
 Option 3: Use snapper rollback (for OpenSuse layout only)
 RO "state" option needed for snapper to function in RO booted snapshot.
@@ -122,7 +122,7 @@ manage-ukis cleanup             # Remove all snapshot UKIs
 | UKIs created    | "Created N bootable snapshot entries"        |
 | Creation failed | "Failed to create bootable snapshot entries" |
 
-**How to disable Notifications: `set NOTIFICATIONS=false in /etc/sdboot-snaps.conf`**
+**How to disable Notifications:** `set NOTIFICATIONS=false in /etc/sdboot-snaps.conf`
 
 **Prerequisites for bootable snapshots:**
 
