@@ -14,7 +14,7 @@ provides=('sdboot-snaps')
 source=(git+"https://github.com/bkmo/sdboot-snaps.git")
 sha256sums=('SKIP')
 backup=("etc/sdboot-snaps.conf")
-install=".install"
+install=.install
 
     package() {
     #cd $pkgname-$pkgver
