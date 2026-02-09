@@ -133,3 +133,4 @@ manage-ukis cleanup             # Remove all snapshot UKIs
 - systemd-ukify package must be installed.
 - If secureboot is enabled, sbctl is needed to sign the uki's (sbctl file database auto-cleaned)
 
+note: This README.md will be copied to /usr/share/doc/sdboot-snaps/README.md on install.
