@@ -74,6 +74,7 @@ require_btrfs_root() {
 	local fstype
 	read -r fstype < <(findmnt --mountpoint / -no FSTYPE)
 	if [[ "$fstype" != "btrfs" ]]; then
+		log_warn "You booted into a RO Overlay Snapshot."
 		log_warn "Root filesystem is not Btrfs. Script stopped."
 		exit 0
 	fi
@@ -99,7 +100,7 @@ require_root
 require_btrfs_root
 
 if is_btrfs_ro; then
-	log_warn "You are in the read-only Btrfs. Refresh stopped."
+	log_warn "You are in a read-only Btrfs Snapshot. Refresh stopped."
 	exit 0
 fi
 
