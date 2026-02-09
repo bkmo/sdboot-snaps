@@ -24,7 +24,7 @@ requirements:
 git clone https://github.com/bkmo/sdboot-snaps
 cd sdboot-snaps
 makepkg -srci
-sudo systemctl enable --now snapper-boot-entries.path
+sudo systemctl enable --now sdboot-snaps-watch.path
 sudo pacman -S snap-pac --needed  ##recommended for pre post pacman snapshots
 ```
 Edit /etc/sdboot-snaps.conf to change default options. READONLY,MICROCODE,NOTIFICATIONS,SNAPSHOTS,EFI,SPLASH
