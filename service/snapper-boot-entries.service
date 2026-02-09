@@ -1,7 +1,0 @@
-[Unit]
-Description=Refresh systemd-boot entries for BTRFS snapshots
-
-[Service]
-Type=oneshot
-ExecStart=/usr/local/bin/refresh-snapshot-ukis
-ExecStartPre=bash -c '/bin/sleep 10'
