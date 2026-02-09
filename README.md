@@ -85,8 +85,8 @@ Option 2: Use snapper-rollback AUR package (Arch subvol layout only)
 
 Option 3: Use snapper rollback (for OpenSuse layout only)
 RO "state" option needed for snapper to function in RO booted snapshot.
- #snapper list ## find snapshot number to restore 
- #snapper rollback <snapshot_number>
+ # snapper list ## find snapshot number to restore 
+ # snapper rollback <snapshot_number>
 ```
 
 ## Automatic UKI Refresh
