@@ -18,14 +18,8 @@
 #   - systemd-ukify for UKI generation
 # =============================================================================
 
-set -Eeuo pipefail
 
-# require root/sudo for all operations
-#if [[ $EUID -ne 0 ]]; then
- #   echo -e "\033[0;31mError:\033[0m This script must be run with sudo or as root."
-  #  echo "Usage: sudo $0 [command]"
-   # exit 1
-#fi
+set -Eeuo pipefail
 
 #set default variables
 SNAPSHOTS_DIR="/.snapshots"
@@ -94,6 +88,11 @@ is_snapshot() {
 	fi
 }
 
+## check if refresh service is running
+if pgrep -f "refresh-snapshot-ukis" &>/dev/null; then
+    log_warn "refresh service is running, please wait for it to finish"
+    exit 0
+fi
 
 ### Main logic
 require_root
@@ -426,7 +425,7 @@ list_snapshots() {
                 echo "  [$num] $desc ($date) ($rorw)(type=$type)"
               count=$((count+1))
             fi
-       done | tac
+       done
 
     #if [ $count -eq 0 ] ; then echo "    No snapshots found in $SNAPSHOTS_DIR"
 
