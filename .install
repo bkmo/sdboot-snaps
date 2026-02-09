@@ -4,6 +4,6 @@
 post_upgrade() {
     systemctl daemon-reload
 
-if systemctl show sdboot-snaps-watch.path  --property=NeedDaemonReload | grep yes >& /dev/null; then systemctl daemon-reload fi
+if "systemctl show sdboot-snaps-watch.path  --property=NeedDaemonReload | grep yes >& /dev/null"; then "systemctl daemon-reload" fi
 
     }
