@@ -1,4 +1,5 @@
 # Maintainer: bkmo <>
+# This PKGbuild builds from git and not release, pkver always up to date.
 pkgname=sdboot-snaps
 pkgver=1.4
 pkgrel=1
@@ -9,13 +10,15 @@ url='https://github.com/bkmo/sdboot-snaps'
 depends=('systemd-ukify' 'snapper' 'btrfs-progs' 'coreutils' 'bash')
 optdepends=('sbctl')
 provides=('sdboot-snaps')
-source=("$pkgname-$pkgver.tar.gz::$url/archive/refs/tags/$pkgver.tar.gz")
-#source=(git+"https://github.com/bkmo/sdbootsnaps.git")
+#source=("$pkgname-$pkgver.tar.gz::$url/archive/refs/tags/$pkgver.tar.gz")
+source=(git+"https://github.com/bkmo/sdbootsnaps.git")
 sha256sums=('SKIP')
 backup=("etc/sdboot-snaps.conf")
 
     package() {
-    cd $pkgname-$pkgver
+    #cd $pkgname-$pkgver
+    cd $pkgname
+
     install -Dm 0644  "pacman/05-path-stop.hook" -t "$pkgdir/usr/share/libalpm/hooks/"
     install -Dm 0644  "pacman/zz-path-start.hook" -t "$pkgdir/usr/share/libalpm/hooks/"
     install -Dm 0755  "pacman/snap-path-pre" -t "$pkgdir/usr/share/libalpm/scripts/"
