@@ -1,9 +1,9 @@
 # SD-Boot UKI snapshot creation and automatic boot entries in sd-boot menu for Arch Linux.
 Boot directly into a previous system state if an update breaks your system.
 Snapshots are set to r/w  and will boot without an overlay filesystem. (keep it simple).
-**Writable snapshots if modified will no longer reflect their original state.
+**Writable snapshots if modified will no longer reflect their original state.**
 Read Only snapshots can be configured via sdboot-snaps.conf. The RO "overlay" option (writable overlay for / no changes saved to snapshot) rerequires the sd-volatile mkinitcpio hook added. The RO "state" option (/var in tmpfs no changes to snapshot) is best for
-OpenSuse btrfs subvol layouts using snapper to rollback.
+OpenSuse btrfs subvol layouts using snapper to rollback. The "Arch Way" btrfs subvolume layout is prefered, but it should also work with the "OpenSuse" layout in RW and RO "state" configuration.
 
  BTRFS Snapshot UKI Manager for systemd-boot (Secure Boot Compatible):
    - creates signed Unified Kernel Images (UKIs) for BTRFS snapshots.
