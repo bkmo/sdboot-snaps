@@ -510,10 +510,17 @@ generate_snapshot_uki() {
     return 0
 }
 
+LOG_FILE="/var/log/snapshot-uki-refresh.log"
+
+log() {
+    echo "[$(date '+%Y-%m-%d %H:%M:%S')] $*" | tee -a "$LOG_FILE"
+}
+
 # function to generate UKIs for snapshots
 refresh_entries() {
     local max_snapshots="${1:-$DEFAULT_SNAPSHOT_COUNT}"
     log_info "Refreshing snapshot UKIs (last $max_snapshots)..."
+    log "Refresh Service refreshing snapshot UKIs (last $max_snapshots)..."
 
     # create UKI directory if needed
     mkdir -p "$UKI_DIR"
@@ -523,6 +530,8 @@ refresh_entries() {
 
     if [ ! -d "$SNAPSHOTS_DIR" ]; then
         log_warn "Snapshots directory $SNAPSHOTS_DIR not found."
+        log "Refresh Service: No snapshots found in /.snapshots, skipping UKI refresh"
+
         echo ""
         echo "To enable bootable root snapshots:"
         echo "  1. Install snapper: pacman -S snapper"
@@ -618,6 +627,8 @@ refresh_entries() {
     done
 
     echo ""
+    log "Created $success bootable snapshot UKIs in $UKI_DIR"
+
     log_info "Created $success bootable snapshot UKIs in $UKI_DIR"
 
     # send desktop notification
@@ -631,6 +642,8 @@ refresh_entries() {
         echo "  Snapshot #N [kernel] (date)"
     else
        notify_error "Failed to create bootable snapshot entries"
+               log "Refresh service failed to create bootable snapshot entries"
+
     fi
 }
 
