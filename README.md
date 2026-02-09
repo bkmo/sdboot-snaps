@@ -74,19 +74,19 @@ cat /proc/cmdline | grep -o 'subvol=[^ ]*'
 ## Making a Snapshot Permanent (Rollback)
 
 ```bash
-# Option 1: Install btrfs-assistant via pacman. (recommended)
-# Best option for Arch subvol layout, edit the .conf, works well with RO "overlay" option.
-sudo pacman -S btrfs-assistant
+Option 1: Install btrfs-assistant via pacman. (recommended)
+Best option for Arch subvol layout, edit the .conf, works well with RO "overlay" option.
+ #sudo pacman -S btrfs-assistant
 
-# Option 2: Use snapper-rollback AUR package (Arch subvol layout only)
-snapper list ## find snapshot number to restore (does not work with ro "overlay")
-snapper-list ## find snapshot number (included script to list snapshots with ro "overlay")
-sudo snapper-rollback <snapshot_number>
+Option 2: Use snapper-rollback AUR package (Arch subvol layout only)
+ #snapper list ## find snapshot number to restore (does not work with ro "overlay")
+ #snapper-list ## find snapshot number (included script to list snapshots with ro "overlay")
+ #sudo snapper-rollback <snapshot_number>
 
-# Option 3: Use snapper rollback (for OpenSuse layout only)
-# RO "state" option needed for snapper to function in RO booted snapshot.
-snapper list ## find snapshot number to restore 
-snapper rollback <snapshot_number>
+Option 3: Use snapper rollback (for OpenSuse layout only)
+RO "state" option needed for snapper to function in RO booted snapshot.
+ #snapper list ## find snapshot number to restore 
+ #snapper rollback <snapshot_number>
 ```
 
 ## Automatic UKI Refresh
