@@ -1,7 +1,3 @@
-# snap-pac
-# https://github.com/wesbarnett/snap-pac
-# Copyright (C) 2016, 2017, 2018 James W. Barnett
-
 # This program is free software; you can redistribute it and/or modify
 # it under the terms of the GNU General Public License as published by
 # the Free Software Foundation; either version 2 of the License, or
@@ -24,7 +20,7 @@ Type = Package
 Target = *
 
 [Action]
-Description = Stop snapshot.path before snap-pac pre...
+Description = Stop sdboot-snaps-watch before snap-pac pre...
 When = PreTransaction
 Exec = /usr/share/libalpm/scripts/snap-path-pre
 NeedsTargets
