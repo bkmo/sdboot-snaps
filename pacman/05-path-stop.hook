@@ -28,4 +28,3 @@ Description = Stop snapshot.path before snap-pac pre...
 When = PreTransaction
 Exec = /usr/share/libalpm/scripts/snap-path-pre
 NeedsTargets
-AbortOnFail
