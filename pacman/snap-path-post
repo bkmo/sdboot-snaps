@@ -1,2 +1,2 @@
 #!/usr/bin/env bash
-systemctl start snapper-boot-entries.path
+systemctl start sdboot-snaps-watch.path
