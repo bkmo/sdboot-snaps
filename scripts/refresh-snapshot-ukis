@@ -1,5 +1,7 @@
 #!/usr/bin/env bash
 
+###  REFRESH ONLY SCRIPT FOR Systemd Service
+
 # BTRFS Snapshot UKI Manager for systemd-boot (Secure Boot Compatible)
 #
 # creates signed Unified Kernel Images (UKIs) for BTRFS snapshots.
@@ -408,34 +410,6 @@ EOF
     echo "$osrelease_file"
 }
 
-# function to list available snapshots
-list_snapshots() {
-    log_info "Available BTRFS root snapshots:"
-    if [ -d "$SNAPSHOTS_DIR" ]; then
-        local count=0
-        for dir in "$SNAPSHOTS_DIR"/*/snapshot; do
-            if [ -d "$dir" ]; then
-                local num=$(basename "$(dirname "$dir")")
-                local info=$(get_snapshot_info "$num")
-                local desc=$(echo "$info" | cut -d'|' -f1)
-                local date=$(echo "$info" | cut -d'|' -f2)a
-                local rorw=$(btrfs property get "$dir" ro)
-                local date=$(echo "$info" | cut -d'|' -f2)
-                local type=$(echo "$info" | cut -d'|' -f3)
-
-                echo "  [$num] $desc ($date) ($rorw)(type=$type)"
-              count=$((count+1))
-            fi
-       done
-
-    #if [ $count -eq 0 ] ; then echo "    No snapshots found in $SNAPSHOTS_DIR"
-
-    else
-        echo "    Snapshots directory $SNAPSHOTS_DIR not found."
-        echo "    Configure snapper for root (/) to enable bootable snapshots."
-    fi
-
-}
 
 # function to generate UKI for a snapshot
 # parameters: snapshot_num, kernel, cmdline, description, snapshot_date
@@ -647,23 +621,6 @@ refresh_entries() {
     fi
 }
 
-# function to list current snapshot UKIs
-list_entries() {
-    log_info "Current snapshot UKIs:"
-    if ls "${UKI_DIR}/${SNAPSHOT_UKI_PREFIX}"*.efi &>/dev/null 2>&1; then
-    for uki in "${UKI_DIR}/${SNAPSHOT_UKI_PREFIX}"*.efi; do
-            local name=$(basename "$uki" .efi)
-            local size=$(du -h "$uki" | cut -f1)
-            local signed="unsigned"
-            if check_secure_boot_signing && sbctl verify "$uki" &>/dev/null; then
-                signed="signed"
-            fi
-            echo "    $name ($size, $signed)"
-        done | tac
-    else
-        echo "    No snapshot UKIs found in $UKI_DIR"
-    fi
-}
 
 # function to clean up snapshot UKIs
 cleanup_entries() {
@@ -684,61 +641,13 @@ cleanup_entries() {
     log_info "Removed $count snapshot UKIs."
 }
 
-# function to show disk space usage
-show_space() {
-    log_info "EFI partition usage:"
-    df -h "$EFI_DIR" | tail -1 | awk '{print "    Total: "$2", Used: "$3" ("$5"), Available: "$4}'
-    echo ""
-    log_info "UKI sizes in $UKI_DIR:"
-    if ls "${UKI_DIR}"/*.efi &>/dev/null 2>&1; then
-        du -h "${UKI_DIR}"/*.efi 2>/dev/null | while read size name; do
-            echo "    $(basename "$name"): $size"
-        done
-        echo ""
-        echo "    Total UKI space: $(du -sh "$UKI_DIR" | cut -f1)"
-    else
-        echo "    No UKIs found"
-    fi
-}
-
 # main
 case "${1:-}" in
     refresh)
         refresh_entries "${2:-$DEFAULT_SNAPSHOT_COUNT}"
         ;;
-    list)
-        list_snapshots
-        echo ""
-        list_entries
-        ;;
-    cleanup)
-        cleanup_entries
-        ;;
-    space)
-        show_space
-        ;;
-    *)
+       *)
         echo "Sdboot-snaps UKI Manager (Secure Boot Compatible)"
-        echo ""
-        echo "Usage: sudo manage-snapshot-ukis {refresh|list|cleanup|space} [count]"
-        echo ""
-        echo "Commands:"
-        echo "  refresh [N]  - Generate bootable UKIs for last N snapshots (default: 7)"
-        echo "  list         - List available snapshots and current UKIs"
-        echo "  cleanup      - Remove all snapshot UKIs"
-        echo "  space        - Show EFI partition space usage"
-        echo ""
-        echo "Examples:"
-        echo "  sudo manage-ukis refresh      # Create UKIs for last 7 snapshots"
-        echo "  sudo manage-ukis refresh 10   # Create UKIs for last 10 snapshots"
-        echo "  sudo manage-ukis list         # Show snapshots and UKIs"
-        echo "  sudo manage-ukis space        # Check EFI partition space"
-        echo ""
-        echo "Notes:"
-        echo "  - UKIs are ~50-100MB each, so limit snapshot count"
-        echo "  - 2GB EFI partition supports ~15-20 UKIs"
-        echo "  - UKIs are automatically signed if sbctl is configured"
-        echo "  - Desktop notifications sent on success/failure"
-        exit 1
+        echo "###  REFRESH ONLY SCRIPT FOR Systemd Service"
         ;;
 esac
