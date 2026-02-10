@@ -1,11 +1,13 @@
 #!/bin/bash
+## arg 1:  the new package version
+post_install() {
+	if systemctl show sdboot-snaps-watch.path  --property=NeedDaemonReload | grep yes >& /dev/null; then systemctl daemon-reload
+fi
+}
 
 ## arg 1:  the new package version
 ## arg 2:  the old package version
 post_upgrade() {
-    systemctl daemon-reload
-
-if systemctl show sdboot-snaps-watch.path  --property=NeedDaemonReload | grep yes >& /dev/null; then systemctl daemon-reload
+    if systemctl show sdboot-snaps-watch.path  --property=NeedDaemonReload | grep yes >& /dev/null; then systemctl daemon-reload
 fi
-
     }
