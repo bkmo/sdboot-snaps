@@ -1,7 +1,7 @@
 # Maintainer: bkmo <>
 # This PKGbuild builds from git and not release, pkver always up to date.
 pkgname=sdboot-snaps
-pkgver=1.4.1
+pkgver=1.5
 pkgrel=1
 pkgdesc='Create UKIs for SD-Boot BTRFS bootable snapshot entries'
 arch=('any')
@@ -27,7 +27,7 @@ install=.install
     install -Dm 0644  "service/sdboot-snaps-watch.path" -t "$pkgdir/etc/systemd/system/"
     install -Dm 0644  "service/sdboot-snaps-watch.service" -t "$pkgdir/etc/systemd/system/"
     install -Dm 0644  "config/sdboot-snaps.conf" -t "$pkgdir/etc/"
-    install -Dm 0755  "scripts/refresh-snapshot-ukis" -t "$pkgdir/usr/local/bin/"
+    install -Dm 0755  "scripts/refresh-ukis" -t "$pkgdir/usr/local/bin/"
     install -Dm 0755  "scripts/manage-ukis" -t "$pkgdir/usr/local/bin/"
     install -Dm 0755  "scripts/snapper-list" -t "$pkgdir/usr/local/bin/"
     install -Dm 0644   README.md -t "$pkgdir/usr/share/doc/${pkgname}/"
