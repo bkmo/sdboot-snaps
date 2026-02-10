@@ -18,7 +18,6 @@
 #   - systemd-ukify for UKI generation
 # =============================================================================
 
-
 set -Eeuo pipefail
 
 #set default variables
@@ -88,11 +87,11 @@ is_snapshot() {
 	fi
 }
 
-## check if refresh service is running
-if pgrep -f "refresh-snapshot-ukis" &>/dev/null; then
-    log_warn "refresh service is running, please wait for it to finish"
-    exit 0
-fi
+#Wait loop if script is already running, then continue
+while ps ax | grep $0 | grep -v $$ | grep bash | grep -v grep &>/dev/null; do
+echo "Waiting for another instance to finish...."
+  sleep 5
+done
 
 ### Main logic
 require_root
