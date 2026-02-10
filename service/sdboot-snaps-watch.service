@@ -3,4 +3,4 @@ Description=Refresh systemd-boot entries for BTRFS snapshots
 
 [Service]
 Type=oneshot
-ExecStart=/usr/local/bin/refresh-snapshot-ukis refresh
+ExecStart=/usr/local/bin/refresh-ukis
