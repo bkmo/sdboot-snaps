@@ -87,13 +87,16 @@ is_snapshot() {
 	fi
 }
 
-#Wait loop if script is already running, then continue
+#Wait if script is already running, then continue.
+is_running() {
 while ps ax | grep $0 | grep -v $$ | grep bash | grep -v grep &>/dev/null; do
-echo "Waiting for another instance to finish...."
+log_warn "Waiting for another instance to finish...."
   sleep 5
 done
+}
 
 ### Main logic
+is_running
 require_root
 require_btrfs_root
 
