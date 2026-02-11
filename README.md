@@ -23,7 +23,7 @@ OpenSuse btrfs subvol layouts using snapper to rollback. The "Arch Way" btrfs su
 ```bash
 git clone https://github.com/bkmo/sdboot-snaps
 cd sdboot-snaps
-makepkg -srci
+makepkg -srci  ## PKGbuild will build from Git main.
 sudo systemctl enable --now sdboot-snaps-watch.path
 sudo pacman -S snap-pac --needed  ##recommended for pre post pacman snapshots
 ```
