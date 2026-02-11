@@ -7,9 +7,9 @@
 # systemd-boot menu entries are automatically created.
 #
 # usage:
-#   manage-ukis refresh [N]  # Generate UKIs for last N snapshots (default: 7)
+#   sudo manage-ukis refresh [N]  # Generate UKIs for last N snapshots (default: 7)
 #   manage-ukis list         # List current snapshot UKIs
-#   manage-ukis cleanup      # Remove all snapshot UKIs
+#   sudo manage-ukis cleanup      # Remove all snapshot UKIs
 #
 # requirements:
 #   - BTRFS with snapper (snapshots in /.snapshots/N/snapshot format)
@@ -56,8 +56,8 @@ log_error() { echo -e "${RED}Error:${NC} $*"; }
 ### Check if the script is being run with root privileges
 require_root() {
 	if ((EUID != 0)); then
-		echo "Script must be run with root privileges."
-		echo "Usage: sudo /usr/local/bin/manage-ukis [command]"
+		log_warn "Script must be run with root privileges."
+		log_info "Usage: sudo manage-ukis [command]"
 		exit 1
 	fi
 }
@@ -81,35 +81,19 @@ is_btrfs_ro() {
 is_snapshot() {
 	cmdline=$(</proc/cmdline)
 	if [[ $cmdline =~ rootflags.*subvol=.*?/([0-9]+)/snapshot ]]; then
-		return 0
-	else
-		return 1
-	fi
+       log_warn "You are booted from the snapshot. Refresh stopped."
+       	exit 0
+		fi
 }
 
-#Wait if script is already running, then continue.
-is_running() {
-while ps ax | grep $0 | grep -v $$ | grep bash | grep -v grep &>/dev/null; do
-log_warn "Waiting for another instance to finish...."
-  sleep 5
-done
-}
 
 ### Main logic
-is_running
-require_root
-require_btrfs_root
 
-if is_btrfs_ro; then
-	log_warn "You are in a read-only Btrfs Snapshot. Refresh stopped."
-	exit 0
-fi
-
-if is_snapshot; then
-	log_warn "You are booted from the snapshot. Refresh stopped."
-	exit 0
-fi
-
+#Wait loop if script is already running, then continue.
+while ps ax | grep $0 | grep -v $$ | grep bash | grep -v grep &>/dev/null; do
+echo "Waiting for another instance to finish...."
+  sleep 5
+done
 
 # notification functions
 
@@ -692,6 +676,9 @@ show_space() {
 # main
 case "${1:-}" in
     refresh)
+    require_root
+    require_btrfs_root
+    is_snapshot
         refresh_entries "${2:-$DEFAULT_SNAPSHOT_COUNT}"
         ;;
     list)
@@ -700,6 +687,9 @@ case "${1:-}" in
         list_entries
         ;;
     cleanup)
+    require_root
+    require_btrfs_root
+    is_snapshot
         cleanup_entries
         ;;
     space)
@@ -719,8 +709,8 @@ case "${1:-}" in
         echo "Examples:"
         echo "  sudo manage-ukis refresh      # Create UKIs for last 7 snapshots"
         echo "  sudo manage-ukis refresh 10   # Create UKIs for last 10 snapshots"
-        echo "  sudo manage-ukis list         # Show snapshots and UKIs"
-        echo "  sudo manage-ukis space        # Check EFI partition space"
+        echo "       manage-ukis list         # Show snapshots and UKIs"
+        echo "       manage-ukis space        # Check EFI partition space"
         echo ""
         echo "Notes:"
         echo "  - UKIs are ~50-100MB each, so limit snapshot count"
