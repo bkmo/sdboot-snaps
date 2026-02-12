@@ -23,5 +23,5 @@ Target = *
 Description = Restart sdboot-snaps-watch before snap-pac post...
 Depends = snap-pac
 When = PostTransaction
-Exec = /usr/share/libalpm/scripts/snap-path-post
+Exec = /usr/share/libalpm/scripts/sdboot-snaps-path post
 NeedsTargets

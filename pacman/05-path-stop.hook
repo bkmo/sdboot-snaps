@@ -22,5 +22,5 @@ Target = *
 [Action]
 Description = Stop sdboot-snaps-watch before snap-pac pre...
 When = PreTransaction
-Exec = /usr/share/libalpm/scripts/snap-path-pre
+Exec = /usr/share/libalpm/scripts/sdboot-snaps-path pre
 NeedsTargets
