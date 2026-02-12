@@ -1,2 +1,0 @@
-#!/usr/bin/env bash
-systemctl stop sdboot-snaps-watch.path && sleep 1
