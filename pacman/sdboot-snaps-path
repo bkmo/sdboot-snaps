@@ -2,11 +2,11 @@
 
 
 pre() {
-systemctl stop snapper-boot-entries.path && sleep1
+systemctl stop sdboot-snaps-watch.path && sleep 1
 }
 
 post() {
-systemctl start snapper-boot-entries.path
+systemctl start sdboot-snaps-watch.path
 }
 
 case "${1:-}" in
