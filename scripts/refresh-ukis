@@ -2,10 +2,10 @@
 # =============================================================================
 # Refresh Snapshot UKIs
 # =============================================================================
-# Called by snapper-boot-entries.service to regenerate snapshot UKIs after snapshots are added or deleted..
+# Called by sdboot-snaps-watch.service to regenerate snapshot UKIs after snapshots are added or deleted..
 # This ensures bootable snapshot entries are always up to date.
 #
-# Installed to: /usr/local/bin/refresh-snapshot-ukis
+# Installed to: /usr/local/bin/refresh-ukis
 # =============================================================================
 
 set -euo pipefail
@@ -16,18 +16,6 @@ LOG_FILE="/var/log/sdboot-snaps-refresh.log"
 log() {
     echo "[$(date '+%Y-%m-%d %H:%M:%S')] $*" | tee -a "$LOG_FILE"
 }
-
-### Check if the script is being run with root privileges
-   if ((EUID != 0)); then
-        echo "Script must be run with root privileges."
-		exit 1
-	fi
-
-## check if manager is already running
-#if pgrep -f "manage-ukis" &>/dev/null; then
-#    log "manage-ukis is already running"
-#    exit 0
-#fi
 
 # find the snapshot manager script
 if [ -x "$SNAPSHOT_MANAGER" ]; then
