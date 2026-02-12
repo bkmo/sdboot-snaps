@@ -1,5 +1,6 @@
 #!/usr/bin/env bash
 
+## Stop/start sdboot-snaps-watch.path during pacman transactions
 
 pre() {
 systemctl stop sdboot-snaps-watch.path && sleep 1
