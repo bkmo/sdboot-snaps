@@ -22,8 +22,7 @@ install=.install
 
     install -Dm 0644  "pacman/05-path-stop.hook" -t "$pkgdir/usr/share/libalpm/hooks/"
     install -Dm 0644  "pacman/zz-path-start.hook" -t "$pkgdir/usr/share/libalpm/hooks/"
-    install -Dm 0755  "pacman/snap-path-pre" -t "$pkgdir/usr/share/libalpm/scripts/"
-    install -Dm 0755  "pacman/snap-path-post" -t "$pkgdir/usr/share/libalpm/scripts/"
+    install -Dm 0755  "pacman/sdboot-snaps-path" -t "$pkgdir/usr/share/libalpm/scripts/"
     install -Dm 0644  "service/sdboot-snaps-watch.path" -t "$pkgdir/etc/systemd/system/"
     install -Dm 0644  "service/sdboot-snaps-watch.service" -t "$pkgdir/etc/systemd/system/"
     install -Dm 0644  "config/sdboot-snaps.conf" -t "$pkgdir/etc/"
