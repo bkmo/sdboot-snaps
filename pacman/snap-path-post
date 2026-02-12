@@ -1,2 +1,0 @@
-#!/usr/bin/env bash
-systemctl start sdboot-snaps-watch.path
