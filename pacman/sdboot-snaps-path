@@ -1,0 +1,19 @@
+#!/usr/bin/env bash
+
+
+pre() {
+systemctl stop snapper-boot-entries.path && sleep1
+}
+
+post() {
+systemctl start snapper-boot-entries.path
+}
+
+case "${1:-}" in
+    pre)
+        pre
+        ;;
+    post)
+        post
+        ;;
+esac
