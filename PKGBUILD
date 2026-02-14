@@ -1,24 +1,22 @@
 # Maintainer: bkmo <>
-# This PKGbuild builds from git and not release, pkver always up to date.
 pkgname=sdboot-snaps
-pkgver=1.6
+pkgver=1.6.1
 pkgrel=1
 pkgdesc='Create UKIs for SD-Boot BTRFS bootable snapshot entries'
 arch=('any')
 license=('GPL3')
 url='https://github.com/bkmo/sdboot-snaps'
-depends=('systemd-ukify' 'snapper' 'btrfs-progs' 'coreutils' 'bash')
+depends=('systemd-ukify' 'snapper' 'btrfs-progs')
 optdepends=('sbctl')
 provides=('sdboot-snaps')
-#source=("$pkgname-$pkgver.tar.gz::$url/archive/refs/tags/$pkgver.tar.gz")
-source=(git+"https://github.com/bkmo/sdboot-snaps.git")
+source=("${pkgname}-${pkgver}.tar.gz::${url}/archive/${pkgver}.tar.gz")
 sha256sums=('SKIP')
 backup=("etc/sdboot-snaps.conf")
 install=.install
 
     package() {
-    #cd $pkgname-$pkgver
-    cd $pkgname
+    cd $pkgname-$pkgver
+    #cd $pkgname
 
     install -Dm 0644  "pacman/05-path-stop.hook" -t "$pkgdir/usr/share/libalpm/hooks/"
     install -Dm 0644  "pacman/zz-path-start.hook" -t "$pkgdir/usr/share/libalpm/hooks/"
