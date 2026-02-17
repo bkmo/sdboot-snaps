@@ -11,5 +11,5 @@ fi
     }
 
 pre_remove() {
-   manage-ukis clean
+   manage-ukis cleanup
     }
