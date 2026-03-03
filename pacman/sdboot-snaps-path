@@ -3,11 +3,11 @@
 ## Stop/start sdboot-snaps-watch.path during pacman transactions
 
 pre() {
-systemctl stop sdboot-snaps-watch.path && sleep 1
+systemctl stop sdboot-snaps-watch.path && sleep 2
 }
 
 post() {
-systemctl start sdboot-snaps-watch.path
+systemctl start sdboot-snaps-watch.path && sleep 2
 }
 
 case "${1:-}" in
